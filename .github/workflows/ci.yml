@@ -1,0 +1,33 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  Linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        lilypond-version: [2.22.0, 2.20.0, 2.18.0, 2.16.0, 2.14.0]
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Install LilyPond
+      run: |
+        wget --no-verbose https://lilypond.org/download/binaries/linux-64/lilypond-${{ matrix.lilypond-version }}-1.linux-64.sh
+        sudo sh lilypond-${{ matrix.lilypond-version }}-1.linux-64.sh --batch
+
+    - name: Create PDFs
+      run: |
+        lilypond --output=test-${{ matrix.lilypond-version }} - <<EOS
+        \version "${{ matrix.lilypond-version }}"
+        \include "unstressed.ily"
+        \pointAndClickOff
+        \relative { g'2\unstressed_\markup { The articulation \unstressedMarkup means \italic unstressed } g2 g1 }
+        EOS
+
+    - name: Archive PDFs
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ runner.os }} artifacts
+        path: '*.pdf'
