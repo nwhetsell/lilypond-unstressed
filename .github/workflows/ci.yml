@@ -7,15 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        lilypond-version: [2.22.1, 2.20.0, 2.18.0, 2.16.0, 2.14.0]
+        lilypond-version: [2.24.0]
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install LilyPond
       run: |
-        wget --no-verbose https://lilypond.org/download/binaries/linux-64/lilypond-${{ matrix.lilypond-version }}-1.linux-64.sh
-        sudo sh lilypond-${{ matrix.lilypond-version }}-1.linux-64.sh --batch
+        wget --no-verbose https://gitlab.com/lilypond/lilypond/-/releases/v${{ matrix.lilypond-version }}/downloads/lilypond-${{ matrix.lilypond-version }}-linux-x86_64.tar.gz
+        tar -xf lilypond-${{ matrix.lilypond-version }}-linux-x86_64.tar.gz
+        echo "$(pwd)/lilypond-${{ matrix.lilypond-version }}/bin" >> $GITHUB_PATH
 
     - name: Create PDFs
       run: |

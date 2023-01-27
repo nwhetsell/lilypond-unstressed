@@ -1,4 +1,4 @@
-\version "2.14.0"
+\version "2.24.0"
 
 unstressedMarkup = \markup {
   \path #0.125
@@ -7,8 +7,8 @@ unstressedMarkup = \markup {
 }
 
 #(append! default-script-alist
-  (list
-    `("unstressed"
+  `(
+    (unstressed
       . (
           (stencil . ,ly:text-interface::print)
           (text . ,unstressedMarkup)
@@ -16,4 +16,4 @@ unstressedMarkup = \markup {
           (padding . 0.2)
           (direction . ,UP)))))
 
-unstressed = #(make-articulation "unstressed")
+unstressed = #(make-articulation 'unstressed)

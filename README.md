@@ -1,6 +1,6 @@
 # lilypond-unstressed
 
-You can use the file [unstressed.ily](unstressed.ily) in this repository to add unstressed articulations to notes in LilyPond v2.14.0 or later. For example, running:
+You can use the file [unstressed.ily](unstressed.ily) in this repository to add unstressed articulations to notes in LilyPond v2.24.0 or later. For example, running:
 
 ```sh
 lilypond --define-default=backend=svg --loglevel=ERROR --output=unstressed - <<EOS
