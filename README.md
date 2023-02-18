@@ -3,7 +3,8 @@
 You can use the file [unstressed.ily](unstressed.ily) in this repository to add unstressed articulations to notes in LilyPond v2.24.0 or later. For example, running:
 
 ```sh
-lilypond --define-default=backend=svg --loglevel=ERROR --output=unstressed - <<EOS
+lilypond --output=unstressed --svg - <<EOS
+\version "2.24.0"
 \include "unstressed.ily"
 \paper {
   page-breaking = #ly:one-line-auto-height-breaking
