@@ -14,6 +14,7 @@ unstressedMarkup = \markup {
           (text . ,unstressedMarkup)
           (avoid-slur . around)
           (padding . 0.2)
-          (direction . ,UP)))))
+          (direction . ,UP)
+          (side-axis . ,Y)))))
 
 unstressed = #(make-articulation 'unstressed)
